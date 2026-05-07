@@ -1,25 +1,15 @@
 {
-  "name": "new-folder-(8)",
+  "name": "deeksha-universe",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000a\u0000l\u0000i\u0000e\u0000n\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "description": "A love letter to Deeksha, built as a universe",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kavish28-kid/alien.git"
+  "engines": {
+    "node": "20.x"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/kavish28-kid/alien/issues"
-  },
-  "homepage": "https://github.com/kavish28-kid/alien#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^4.18.2"
   }
 }

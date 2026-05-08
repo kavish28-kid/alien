@@ -20,6 +20,26 @@ body{
   position:relative;
 }
 
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:none;
+}
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
 /* CURSOR */
 #custom-cursor{
   position:fixed;
@@ -59,6 +79,205 @@ canvas#universe{
   pointer-events:none;
   z-index:2;
   overflow:hidden;
+}
+
+/* QUICK NAV */
+.quick-nav{
+  position:fixed;
+  top:50%;
+  right:22px;
+  transform:translateY(-50%);
+  z-index:80;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.quick-nav a{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  border:1px solid rgba(255,180,200,0.6);
+  background:rgba(255,27,109,0.12);
+  box-shadow:0 0 18px rgba(255,27,109,0.25);
+  transition:all 0.25s ease;
+}
+
+.quick-nav a.active,
+.quick-nav a:hover{
+  background:#ff1b6d;
+  transform:scale(1.45);
+  box-shadow:0 0 20px rgba(255,27,109,0.85);
+}
+
+/* SECRET GATE */
+#secret-gate{
+  position:fixed;
+  inset:0;
+  z-index:9997;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(255,27,109,0.22),transparent 38%),
+    rgba(0,8,20,0.94);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  backdrop-filter:blur(18px);
+  transition:opacity 0.8s ease,visibility 0.8s ease;
+  overflow:hidden;
+}
+
+#secret-gate.unlocked{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.gate-panel{
+  width:100%;
+  max-width:min(440px,calc(100vw - 36px));
+  min-width:0;
+  border:1px solid rgba(255,27,109,0.35);
+  border-radius:28px;
+  padding:38px 30px;
+  text-align:center;
+  background:linear-gradient(135deg,rgba(13,0,7,0.92),rgba(26,8,16,0.86));
+  box-shadow:0 0 130px rgba(255,27,109,0.28);
+}
+
+.gate-mark{
+  font-size:58px;
+  margin-bottom:18px;
+  filter:drop-shadow(0 0 18px rgba(255,27,109,0.75));
+  animation:heartPulse 2s ease-in-out infinite;
+}
+
+.gate-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(27px,7vw,32px);
+  margin-bottom:10px;
+  line-height:1.12;
+}
+
+.gate-copy{
+  color:rgba(255,220,230,0.8);
+  font-style:italic;
+  line-height:1.7;
+  margin-bottom:24px;
+  overflow-wrap:break-word;
+}
+
+.gate-form{
+  display:flex;
+  gap:10px;
+  min-width:0;
+}
+
+.gate-form input{
+  min-width:0;
+  width:100%;
+  flex:1;
+  height:46px;
+  border:1px solid rgba(255,27,109,0.35);
+  border-radius:999px;
+  background:rgba(255,255,255,0.06);
+  color:#fff;
+  padding:0 17px;
+  outline:none;
+}
+
+.gate-error{
+  min-height:22px;
+  margin-top:14px;
+  color:#ff8ab1;
+  font-size:15px;
+  font-style:italic;
+}
+
+.romance-button,
+.icon-button{
+  border:1px solid rgba(255,27,109,0.45);
+  background:linear-gradient(135deg,rgba(255,27,109,0.88),rgba(196,30,58,0.88));
+  color:#fff;
+  border-radius:999px;
+  min-height:46px;
+  padding:0 22px;
+  font-family:'Cinzel',serif;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  box-shadow:0 0 28px rgba(255,27,109,0.32);
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
+}
+
+.romance-button:hover,
+.icon-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 38px rgba(255,27,109,0.42);
+}
+
+.secondary-button{
+  background:rgba(255,255,255,0.06);
+}
+
+.inline-actions{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+/* INTERACTIVE CONSTELLATION */
+.constellation{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.wish-star{
+  position:absolute;
+  width:28px;
+  height:28px;
+  border:0;
+  background:transparent;
+  color:#ffb3cc;
+  font-size:24px;
+  pointer-events:auto;
+  text-shadow:0 0 18px rgba(255,27,109,0.9);
+  animation:twinkleWish 2.8s ease-in-out infinite;
+}
+
+@keyframes twinkleWish{
+  0%,100%{transform:scale(1) rotate(0deg);opacity:0.68;}
+  50%{transform:scale(1.22) rotate(12deg);opacity:1;}
+}
+
+.wish-pop{
+  position:absolute;
+  left:50%;
+  bottom:16%;
+  transform:translateX(-50%) translateY(20px);
+  width:min(520px,calc(100vw - 36px));
+  opacity:0;
+  pointer-events:none;
+  border:1px solid rgba(255,27,109,0.38);
+  border-radius:22px;
+  background:rgba(13,0,7,0.82);
+  color:rgba(255,235,242,0.95);
+  padding:18px 22px;
+  font-size:18px;
+  line-height:1.55;
+  font-style:italic;
+  backdrop-filter:blur(14px);
+  box-shadow:0 18px 70px rgba(255,27,109,0.28);
+  transition:opacity 0.35s ease,transform 0.35s ease;
+}
+
+.wish-pop.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 .shooting-star{
@@ -659,6 +878,183 @@ canvas#globe{
   margin-top:20px;
 }
 
+/* GALLERY SECTION */
+#gallery-section{
+  max-width:1050px;
+  margin:0 auto;
+  padding:100px 20px;
+  text-align:center;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr 1fr;
+  gap:18px;
+  margin-top:50px;
+}
+
+.gallery-tile{
+  min-height:230px;
+  border:1.5px solid rgba(255,27,109,0.24);
+  border-radius:22px;
+  background:
+    linear-gradient(135deg,rgba(255,27,109,0.13),rgba(196,30,58,0.04)),
+    radial-gradient(circle at 25% 20%,rgba(255,180,200,0.2),transparent 42%);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:22px;
+  text-align:left;
+  overflow:hidden;
+  position:relative;
+  animation:fadeInUp 0.8s ease both;
+}
+
+.gallery-tile:nth-child(2){
+  min-height:310px;
+}
+
+.gallery-tile:nth-child(4){
+  grid-column:span 2;
+}
+
+.gallery-tile::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.74),transparent 60%);
+}
+
+.gallery-label,
+.gallery-text{
+  position:relative;
+  z-index:1;
+}
+
+.gallery-label{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:3px;
+  color:#ff8ab1;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.gallery-text{
+  color:rgba(255,235,242,0.92);
+  font-size:18px;
+  line-height:1.55;
+  font-style:italic;
+}
+
+/* SURPRISE SECTION */
+#surprise-section{
+  max-width:780px;
+  margin:0 auto;
+  padding:100px 20px;
+  text-align:center;
+}
+
+.surprise-box{
+  margin-top:45px;
+  padding:50px 38px;
+  border:1.5px solid rgba(255,27,109,0.34);
+  border-radius:32px;
+  background:linear-gradient(135deg,rgba(13,0,7,0.94),rgba(26,8,16,0.88));
+  box-shadow:0 0 110px rgba(255,27,109,0.22);
+  animation:fadeInUp 1s ease both;
+}
+
+.surprise-message{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height 0.8s ease,opacity 0.8s ease,margin-top 0.8s ease;
+  color:rgba(255,230,238,0.94);
+  font-size:clamp(18px,2.4vw,25px);
+  font-style:italic;
+  line-height:2;
+}
+
+.surprise-box.open .surprise-message{
+  max-height:680px;
+  opacity:1;
+  margin-top:34px;
+}
+
+.tiny-note{
+  color:rgba(255,180,200,0.68);
+  font-size:15px;
+  line-height:1.75;
+  font-style:italic;
+  margin-top:18px;
+}
+
+.audio-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.audio-status{
+  color:rgba(255,220,230,0.78);
+  font-style:italic;
+  font-size:15px;
+}
+
+/* PROMISE SECTION */
+#promise-section{
+  max-width:980px;
+  margin:0 auto;
+  padding:100px 20px;
+  text-align:center;
+}
+
+.promise-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:50px;
+}
+
+.promise-card{
+  min-height:250px;
+  padding:34px 26px;
+  border:1.5px solid rgba(255,27,109,0.28);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(13,0,7,0.94),rgba(35,0,20,0.78));
+  box-shadow:0 0 70px rgba(255,27,109,0.13);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  animation:fadeInUp 0.9s ease both;
+}
+
+.promise-icon{
+  font-size:34px;
+  margin-bottom:18px;
+  filter:drop-shadow(0 0 12px rgba(255,27,109,0.55));
+}
+
+.promise-title{
+  font-family:'Cinzel',serif;
+  font-size:13px;
+  letter-spacing:3px;
+  color:#ff8ab1;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.promise-text{
+  color:rgba(255,230,238,0.92);
+  font-size:17px;
+  line-height:1.75;
+  font-style:italic;
+}
+
 /* LETTER SECTION */
 #letter-section{
   max-width:800px;
@@ -807,12 +1203,51 @@ canvas#globe{
 
 /* RESPONSIVE */
 @media(max-width:768px){
+  body,
+  button{
+    cursor:auto;
+  }
+  #custom-cursor,
+  #cursor-trail{
+    display:none;
+  }
+  .quick-nav{
+    top:auto;
+    right:50%;
+    bottom:14px;
+    transform:translateX(50%);
+    flex-direction:row;
+    padding:10px 12px;
+    border:1px solid rgba(255,27,109,0.22);
+    border-radius:999px;
+    background:rgba(0,8,20,0.68);
+    backdrop-filter:blur(12px);
+  }
+  .gate-form{
+    flex-direction:column;
+  }
   .memories-grid{
     grid-template-columns:repeat(2,1fr);
+  }
+  .gallery-grid{
+    grid-template-columns:1fr;
+  }
+  .promise-list{
+    grid-template-columns:1fr;
+  }
+  .gallery-tile,
+  .gallery-tile:nth-child(2){
+    min-height:230px;
+  }
+  .gallery-tile:nth-child(4){
+    grid-column:auto;
   }
   .reason-card{padding:25px 20px;}
   .letter-box{padding:40px 25px;}
   .voice-box{padding:40px 25px;}
+  .page{
+    padding:70px 18px;
+  }
 }
 
 @media(max-width:480px){
@@ -826,10 +1261,47 @@ canvas#globe{
     width:80vw !important;
     height:80vw !important;
   }
+  .hero-title{
+    letter-spacing:4px;
+  }
+  .hero-badge,
+  .scroll-hint,
+  .from-kavish{
+    letter-spacing:2.5px;
+  }
+  .music-player,
+  .surprise-box{
+    padding:36px 22px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:0.01ms !important;
+  }
 }
 </style>
 </head>
 <body>
+
+<div id="secret-gate">
+  <div class="gate-panel">
+    <div class="gate-mark">💖</div>
+    <h2 class="gate-title">For Deeksha Only</h2>
+    <p class="gate-copy">A small universe, locked with the name it was made for.</p>
+    <form class="gate-form" id="gate-form">
+      <label class="sr-only" for="gate-code">Secret word</label>
+      <input id="gate-code" type="password" autocomplete="off" placeholder="Her name">
+      <button class="romance-button" type="submit">Open</button>
+    </form>
+    <p class="gate-error" id="gate-error"></p>
+  </div>
+</div>
 
 <div id="custom-cursor"></div>
 <div id="cursor-trail"></div>
@@ -847,13 +1319,30 @@ canvas#globe{
 <canvas id="universe"></canvas>
 <div id="shooting-stars"></div>
 
+<nav class="quick-nav" aria-label="Sections">
+  <a href="#hero" aria-label="Home"></a>
+  <a href="#globe-section" aria-label="Universe"></a>
+  <a href="#reasons-section" aria-label="Reasons"></a>
+  <a href="#memories-section" aria-label="Memories"></a>
+  <a href="#gallery-section" aria-label="Gallery"></a>
+  <a href="#promise-section" aria-label="Promises"></a>
+  <a href="#letter-section" aria-label="Letter"></a>
+  <a href="#final-section" aria-label="Final"></a>
+</nav>
+
 <!-- HERO -->
 <section class="page" id="hero">
   <div class="floating-hearts" id="hearts-container"></div>
+  <div class="constellation" id="constellation"></div>
+  <div class="wish-pop" id="wish-pop"></div>
   <div class="hero-badge">✦ From Kavish, with infinite love ✦</div>
   <h1 class="hero-name">Deeksha</h1>
   <p class="hero-title">MY ENTIRE UNIVERSE</p>
   <p class="hero-sub">Before you, the stars were just stars.<br>After you — they all spell your name in light.</p>
+  <div class="inline-actions">
+    <button class="romance-button" id="star-message-btn" type="button">Touch a Star</button>
+    <button class="romance-button secondary-button" id="skip-letter-btn" type="button">Read the Letter</button>
+  </div>
   <p class="scroll-hint">↓ scroll into forever ↓</p>
 </section>
 
@@ -937,6 +1426,39 @@ canvas#globe{
   </div>
 </section>
 
+<!-- GALLERY -->
+<section class="page" id="gallery-section">
+  <div class="reveal" style="text-align:center;margin-bottom:50px;">
+    <p class="section-sub">Places your real photos can live</p>
+    <h2 class="section-title">Little Pieces Of Us</h2>
+    <p class="section-desc">
+      Add your favourite screenshots, photos, or tiny moments here later. For now, every tile is a promise waiting for a memory.
+    </p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-tile reveal">
+      <div class="gallery-label">First favourite</div>
+      <div class="gallery-text">The photo or chat that still makes you smile before you even open it.</div>
+    </div>
+    <div class="gallery-tile reveal">
+      <div class="gallery-label">Her laugh</div>
+      <div class="gallery-text">A place for the moment you wish you could replay out loud.</div>
+    </div>
+    <div class="gallery-tile reveal">
+      <div class="gallery-label">Our someday</div>
+      <div class="gallery-text">A soft corner for the plans you have not said fully yet.</div>
+    </div>
+    <div class="gallery-tile reveal">
+      <div class="gallery-label">Keep this</div>
+      <div class="gallery-text">One real memory from Kavish goes here — specific, simple, and impossible to fake.</div>
+    </div>
+    <div class="gallery-tile reveal">
+      <div class="gallery-label">Always</div>
+      <div class="gallery-text">A tiny proof that even ordinary days become important when Deeksha is in them.</div>
+    </div>
+  </div>
+</section>
+
 <!-- VOICE -->
 <section class="page" id="voice-section">
   <div class="reveal" style="text-align:center;margin-bottom:50px;">
@@ -977,6 +1499,56 @@ canvas#globe{
   </div>
 </section>
 
+<!-- SURPRISE -->
+<section class="page" id="surprise-section">
+  <div class="reveal" style="text-align:center;margin-bottom:40px;">
+    <p class="section-sub">For the days you miss me</p>
+    <h2 class="section-title">Open This When You Need Me</h2>
+  </div>
+  <div class="surprise-box reveal" id="surprise-box">
+    <button class="romance-button" id="surprise-btn" type="button">Open My Heart</button>
+    <div class="surprise-message">
+      Deeksha, if you are reading this on a quiet day, I hope you remember this:
+      somewhere, Kavish is thinking of you with the same softness, the same madness,
+      and the same certainty. You are not hard to love. You are the easiest yes in my life.
+      <div class="audio-row">
+        <button class="romance-button secondary-button" id="audio-btn" type="button">Play Voice Note</button>
+        <span class="audio-status" id="audio-status">Add voice-note.mp3 beside index.html to make this real.</span>
+      </div>
+      <p class="tiny-note">This message can become your exact words whenever you want to give me them.</p>
+    </div>
+  </div>
+  <audio id="voice-note" preload="none" src="voice-note.mp3"></audio>
+</section>
+
+<!-- PROMISE -->
+<section class="page" id="promise-section">
+  <div class="reveal" style="text-align:center;margin-bottom:45px;">
+    <p class="section-sub">Not loud promises, real ones</p>
+    <h2 class="section-title">What I Promise You</h2>
+    <p class="section-desc">
+      Deeksha, love is not only big words. It is showing up gently, choosing you honestly, and making your heart feel less alone.
+    </p>
+  </div>
+  <div class="promise-list">
+    <div class="promise-card reveal">
+      <div class="promise-icon">♡</div>
+      <div class="promise-title">I will listen</div>
+      <div class="promise-text">Not just to reply, not just when it is easy, but to understand the little things your heart is trying to say.</div>
+    </div>
+    <div class="promise-card reveal">
+      <div class="promise-icon">✦</div>
+      <div class="promise-title">I will choose you</div>
+      <div class="promise-text">On ordinary days, on quiet days, on days when distance feels too big, I will still keep choosing you.</div>
+    </div>
+    <div class="promise-card reveal">
+      <div class="promise-icon">∞</div>
+      <div class="promise-title">I will stay soft</div>
+      <div class="promise-text">With your feelings, your silences, your smile, your voice, and every version of you that you let me know.</div>
+    </div>
+  </div>
+</section>
+
 <!-- LETTER -->
 <section class="page" id="letter-section">
   <div class="divider"></div>
@@ -985,7 +1557,21 @@ canvas#globe{
     <h2 class="section-title">A Letter Across Every Distance</h2>
   </div>
   <div class="letter-box reveal">
-    <p class="letter-text">
+    <p class="letter-text" id="letter-text" data-letter="My Deeksha,
+
+I made this because I wanted you to feel — even for a moment — what it is like to be inside my heart. This is what it looks like in here. Stars everywhere, and your name written on all of them.
+
+I love talking to you. I love hearing you. Your voice is the thing I look forward to most in any day. It is not just a sound — it is a feeling. It is warmth. It is home.
+
+You make ordinary moments feel like the most important scenes in a film. Like Shiddat — that kind of love that refuses to be quiet, that burns through every distance, that does not know how to be small.
+
+That is what I feel for you.
+
+I want to keep talking to you. I want to keep hearing you. I want to be the person whose voice you also look forward to, whose words you also keep.
+
+You are not just someone I like, Deeksha. You are the person I built a whole universe for, just to show you how big this feels.
+
+With every star in this sky,">
       My Deeksha,<br><br>
       I made this because I wanted you to feel — even for a moment — what it is like to be inside my heart. This is what it looks like in here. Stars everywhere, and your name written on all of them.<br><br>
       I love talking to you. I love <em>hearing</em> you. Your voice is the thing I look forward to most in any day. It is not just a sound — it is a feeling. It is warmth. It is home.<br><br>
@@ -995,6 +1581,9 @@ canvas#globe{
       You are not just someone I like, Deeksha. You are the person I built a whole universe for, just to show you how big this feels.<br><br>
       With every star in this sky,
     </p>
+    <div class="inline-actions">
+      <button class="romance-button secondary-button" id="type-letter-btn" type="button">Write It Slowly</button>
+    </div>
     <div class="letter-sign">— Kavish ♡</div>
   </div>
 </section>
@@ -1014,6 +1603,32 @@ canvas#globe{
 </section>
 
 <script>
+const secretGate=document.getElementById('secret-gate');
+const gateForm=document.getElementById('gate-form');
+const gateCode=document.getElementById('gate-code');
+const gateError=document.getElementById('gate-error');
+const unlockPasswords=['alien'];
+
+function unlockUniverse(){
+  secretGate.classList.add('unlocked');
+  window.localStorage.setItem('deekshaUniverseUnlocked','yes');
+}
+
+if(window.localStorage.getItem('deekshaUniverseUnlocked')==='yes'){
+  secretGate.classList.add('unlocked');
+}
+
+gateForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const answer=gateCode.value.trim().toLowerCase();
+  if(unlockPasswords.includes(answer)){
+    unlockUniverse();
+  }else{
+    gateError.textContent='Hint: the word only you two know.';
+    gateCode.select();
+  }
+});
+
 // CUSTOM CURSOR
 const cursor=document.getElementById('custom-cursor');
 const cursorTrail=document.getElementById('cursor-trail');
@@ -1032,6 +1647,75 @@ setInterval(()=>{
   cursorTrail.style.left=trailX+'px';
   cursorTrail.style.top=trailY+'px';
 },16);
+
+document.querySelectorAll('button,a,input').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='24px';
+    cursor.style.height='24px';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='14px';
+    cursor.style.height='14px';
+  });
+});
+
+// QUICK NAV
+const navLinks=[...document.querySelectorAll('.quick-nav a')];
+const sectionIds=navLinks.map(link=>link.getAttribute('href'));
+const navObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(link=>{
+        link.classList.toggle('active',link.getAttribute('href')==='#'+entry.target.id);
+      });
+    }
+  });
+},{threshold:0.45});
+
+sectionIds.forEach(id=>{
+  const section=document.querySelector(id);
+  if(section)navObserver.observe(section);
+});
+
+// HERO STAR MESSAGES
+const constellation=document.getElementById('constellation');
+const wishPop=document.getElementById('wish-pop');
+const wishMessages=[
+  'I choose you in the quiet moments too, not just the beautiful ones.',
+  'Your voice has become one of my safest places.',
+  'Some people feel like home before they ever become a place.',
+  'If I could keep one sound forever, it would be your laugh.',
+  'Every version of my future looks softer with you in it.'
+];
+
+const starPositions=[
+  [16,24],[78,18],[64,42],[24,58],[86,66]
+];
+
+starPositions.forEach(([left,top],i)=>{
+  const star=document.createElement('button');
+  star.className='wish-star';
+  star.type='button';
+  star.style.left=left+'%';
+  star.style.top=top+'%';
+  star.style.animationDelay=(i*0.35)+'s';
+  star.setAttribute('aria-label','Reveal a message');
+  star.textContent='✦';
+  star.addEventListener('click',()=>showWish(i));
+  constellation.appendChild(star);
+});
+
+function showWish(index=Math.floor(Math.random()*wishMessages.length)){
+  wishPop.textContent=wishMessages[index];
+  wishPop.classList.add('show');
+  clearTimeout(showWish.timer);
+  showWish.timer=setTimeout(()=>wishPop.classList.remove('show'),4200);
+}
+
+document.getElementById('star-message-btn').addEventListener('click',()=>showWish());
+document.getElementById('skip-letter-btn').addEventListener('click',()=>{
+  document.getElementById('letter-section').scrollIntoView({behavior:'smooth'});
+});
 
 // LOADING SCREEN
 setTimeout(()=>{
@@ -1278,6 +1962,83 @@ function createVoiceWaves(containerId){
 
 createVoiceWaves('voice-waves');
 createVoiceWaves('voice-waves2');
+
+// SURPRISE AND AUDIO
+const surpriseBox=document.getElementById('surprise-box');
+const surpriseBtn=document.getElementById('surprise-btn');
+const audioBtn=document.getElementById('audio-btn');
+const audioStatus=document.getElementById('audio-status');
+const voiceNote=document.getElementById('voice-note');
+
+surpriseBtn.addEventListener('click',()=>{
+  surpriseBox.classList.toggle('open');
+  surpriseBtn.textContent=surpriseBox.classList.contains('open')?'Keep It Open':'Open My Heart';
+});
+
+audioBtn.addEventListener('click',async()=>{
+  try{
+    if(voiceNote.paused){
+      await voiceNote.play();
+      audioBtn.textContent='Pause Voice Note';
+      audioStatus.textContent='Playing your voice note.';
+    }else{
+      voiceNote.pause();
+      audioBtn.textContent='Play Voice Note';
+      audioStatus.textContent='Paused.';
+    }
+  }catch(error){
+    audioStatus.textContent='No voice-note.mp3 found yet. Add it beside index.html when ready.';
+  }
+});
+
+voiceNote.addEventListener('ended',()=>{
+  audioBtn.textContent='Play Voice Note';
+  audioStatus.textContent='Voice note ended.';
+});
+
+// TYPEWRITER LETTER
+const letterText=document.getElementById('letter-text');
+const typeLetterBtn=document.getElementById('type-letter-btn');
+let typing=false;
+let typingTimer=null;
+
+function formatLetter(text){
+  return text
+    .split('\n\n')
+    .map(part=>part.trim().replace(/\n/g,'<br>'))
+    .join('<br><br>');
+}
+
+typeLetterBtn.addEventListener('click',()=>{
+  const fullText=letterText.dataset.letter;
+  if(typing){
+    clearTimeout(typingTimer);
+    typing=false;
+    letterText.innerHTML=formatLetter(fullText);
+    typeLetterBtn.textContent='Write It Slowly';
+    return;
+  }
+
+  typing=true;
+  typeLetterBtn.textContent='Show Full Letter';
+  letterText.textContent='';
+  let index=0;
+
+  function typeNext(){
+    if(!typing)return;
+    letterText.textContent=fullText.slice(0,index);
+    index+=1;
+    if(index<=fullText.length){
+      typingTimer=setTimeout(typeNext,24);
+    }else{
+      typing=false;
+      letterText.innerHTML=formatLetter(fullText);
+      typeLetterBtn.textContent='Write It Slowly';
+    }
+  }
+
+  typeNext();
+});
 
 // SCROLL REVEAL
 const observer=new IntersectionObserver((entries)=>{
